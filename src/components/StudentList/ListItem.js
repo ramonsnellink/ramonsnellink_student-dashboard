@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const ListItem = () => {
+const ListItem = ({ name }) => {
   return (
     <li>
-      Student naam <Link to="/studentpage">Student page</Link>
+      <Link to={`/students/${name}`}>{name}</Link>
     </li>
   );
 };
