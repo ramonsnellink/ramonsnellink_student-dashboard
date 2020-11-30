@@ -12,7 +12,7 @@ const StudentPage = ({ match }) => {
   return (
     <div>
       <h1>{studentName}</h1>
-      <Chart />
+      <Chart studentData={individualStudentData} />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { StudentsContext } from "../../contexts/StudentsContext";
 import Chart from "../Chart";
 
 // add students context to chart as prop here.
+// Make a function to calculate avarage per student and make a new state?
 
 const StudentDashboard = () => {
   const [students] = useContext(StudentsContext);
@@ -11,8 +12,7 @@ const StudentDashboard = () => {
   return (
     <div>
       <h1>Student Dashboard</h1>
-
-      <Chart />
+      <Chart studentData={students} />
     </div>
   );
 };
