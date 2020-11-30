@@ -50,8 +50,8 @@ const dashboardTheme = {
     style: {
       data: {
         fill: "#ecba1d",
-        padding: 0,
         strokeWidth: 0,
+        // stroke: ({ index }) => (+index % 2 === 0 ? "#000000" : "#c43a31"),
       },
       labels: {
         fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, sans-serif",

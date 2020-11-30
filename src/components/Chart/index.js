@@ -49,11 +49,13 @@ const Chart = ({ studentData }) => {
   return (
     <>
       <VictoryChart domainPadding={50} theme={dashboardTheme}>
-        <VictoryGroup offset={20} domainPadding={{ x: [0, 0] }}>
+        <VictoryGroup offset={4} domainPadding={{ x: [0, 0] }}>
           <VictoryBar
             // horizontal
             labelComponent={<VictoryTooltip />}
             data={assignmentRatingAverageWithLabels}
+            barWidth={3}
+            // alignment="start"
             x="assignment"
             y="difficultyRating"
             tickValues={[1, 2, 3, 4, 5]}
@@ -63,6 +65,8 @@ const Chart = ({ studentData }) => {
             // horizontal
             labelComponent={<VictoryTooltip />}
             data={assignmentRatingAverageWithLabels}
+            barWidth={3}
+            // alignment="end"
             x="assignment"
             y="enjoymentRating"
             tickValues={[1, 2, 3, 4, 5]}
