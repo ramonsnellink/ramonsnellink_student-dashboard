@@ -8,7 +8,6 @@ const StudentList = () => {
 
   // can I move these functions to another file to re-use?
 
-  // remove duplicate entries of students
   const individualStudents = [...new Set(students.map((student) => student.id))];
 
   const findStudent = (id) => {
@@ -18,15 +17,15 @@ const StudentList = () => {
     return student;
   };
 
-  const studentListWithId = individualStudents.map((id) => {
+  const studentListWithName = individualStudents.map((id) => {
     return { student: findStudent(id).student, id: id };
   });
 
-  const StudentList = studentListWithId.map((student) => {
+  const StudentList = studentListWithName.map((student) => {
     return <ListItem key={student.id} name={student.student} />;
   });
 
-  console.log("indiv students", studentListWithId);
+  console.log("indiv students", studentListWithName);
   return (
     <div>
       <h1>Student List</h1>

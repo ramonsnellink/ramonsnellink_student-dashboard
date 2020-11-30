@@ -10,7 +10,7 @@ import {
 
 import dashboardTheme from "./theme";
 
-const Chart = ({ studentData }) => {
+const Chart = ({ studentData, ratingType }) => {
   const getAvgGrade = (assignment, type) => {
     // filter out the specific assignment, and check if we want the difficulty rating or enjoymentrating
     const getAssignments = studentData
@@ -48,25 +48,24 @@ const Chart = ({ studentData }) => {
 
   return (
     <>
-      <VictoryChart domainPadding={50} theme={dashboardTheme}>
-        <VictoryGroup offset={4} domainPadding={{ x: [0, 0] }}>
+      <VictoryChart domainPadding={10} theme={dashboardTheme}>
+        <VictoryGroup offset={4}>
           <VictoryBar
             // horizontal
             labelComponent={<VictoryTooltip />}
             data={assignmentRatingAverageWithLabels}
             barWidth={3}
-            // alignment="start"
             x="assignment"
             y="difficultyRating"
             tickValues={[1, 2, 3, 4, 5]}
             tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
           />
+
           <VictoryBar
             // horizontal
             labelComponent={<VictoryTooltip />}
             data={assignmentRatingAverageWithLabels}
             barWidth={3}
-            // alignment="end"
             x="assignment"
             y="enjoymentRating"
             tickValues={[1, 2, 3, 4, 5]}
@@ -77,16 +76,13 @@ const Chart = ({ studentData }) => {
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
 
-          style={{
-            tickLabels: { angle: -90, textAnchor: "end" },
-          }}
           tickValues={[1, 2, 3, 4, 5]}
           tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
         />
         <VictoryAxis dependentAxis />
       </VictoryChart>
-      {/* 
-      <VictoryChart domainPadding={15} theme={wincTheme}>
+
+      <VictoryChart domainPadding={15} theme={dashboardTheme}>
         <VictoryLine
           style={{
             data: { stroke: "#c43a31" },
@@ -109,10 +105,10 @@ const Chart = ({ studentData }) => {
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
           tickValues={[1, 2, 3, 4, 5]}
-          tickFormat={assignmentRatingAverage.map((avg) => avg.assignment)}
+          tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
         />
         <VictoryAxis dependentAxis />
-      </VictoryChart> */}
+      </VictoryChart>
     </>
   );
 };

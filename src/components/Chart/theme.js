@@ -30,28 +30,29 @@ const dashboardTheme = {
         strokeLinecap: "round",
         strokeLinejoin: "round",
       },
-      // onderste labels
+      // lower labels
       tickLabels: {
         fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, sans-serif",
         fontSize: 8,
         letterSpacing: "normal",
         padding: 10,
-
         fill: "#455A64",
         stroke: "transparent",
         strokeWidth: 0,
+        angle: -90,
+        textAnchor: "end",
+        verticalAnchour: "middle",
       },
     },
     width: 350,
     height: 500,
-    padding: 50,
+    padding: 30,
   },
   bar: {
     style: {
       data: {
         fill: "#ecba1d",
         strokeWidth: 0,
-        // stroke: ({ index }) => (+index % 2 === 0 ? "#000000" : "#c43a31"),
       },
       labels: {
         fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, sans-serif",
@@ -68,7 +69,7 @@ const dashboardTheme = {
     padding: 20,
   },
 
-  // grote van de chart
+  // size of the chart
   chart: {
     width: 800,
     height: 300,
@@ -138,7 +139,7 @@ const dashboardTheme = {
         fill: "transparent",
         opacity: 1,
         stroke: "#455A64",
-        strokeWidth: 2,
+        strokeWidth: 1,
       },
       labels: {
         fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, sans-serif",
@@ -154,10 +155,12 @@ const dashboardTheme = {
     height: 350,
     padding: 50,
   },
+
+  // the hover tooltip
   tooltip: {
     style: {
       fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, sans-serif",
-      fontSize: 10,
+      fontSize: 8,
       letterSpacing: "normal",
       padding: 5,
       fill: "#455A64",
