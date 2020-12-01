@@ -10,7 +10,7 @@ import {
 
 import dashboardTheme from "./theme";
 
-const Chart = ({ studentData, ratingType }) => {
+const Chart = ({ studentData }) => {
   const getAvgGrade = (assignment, type) => {
     // filter out the specific assignment, and check if we want the difficulty rating or enjoymentrating
     const getAssignments = studentData

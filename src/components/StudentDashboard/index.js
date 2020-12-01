@@ -1,60 +1,80 @@
 import React, { useContext, useState } from "react";
 import { StudentsContext } from "../../contexts/StudentsContext";
+import studentListWithNames from "../utils/studentListNames";
 
 import Chart from "../Chart";
 
-// First: set both in the state to true
-// in state bijhouden wat gechecked is.
-// object meegeven als props
-// conditional render in de chart van de bars
-
 const StudentDashboard = () => {
-  const [students, setStudents] = useContext(StudentsContext);
+  const [students] = useContext(StudentsContext);
 
-  const individualStudents = [...new Set(students.map((student) => student.id))];
+  // Get individual students based on the students array. Then add a "checked" property
+  const studentListWithFilter = studentListWithNames(students).map((student) => {
+    return { ...student, checked: true };
+  });
 
-  const findStudent = (id) => {
-    const student = students.find((student) => {
-      return id === student.id;
+  const [filters, setFilters] = useState(studentListWithFilter); // state to hold the filters (checkboxes). This is used to filter the students data.
+
+  // get assignments for an individual student
+  const filterStudent = (studentName) => {
+    const student = students.filter((student) => {
+      return student.student === studentName;
     });
     return student;
   };
 
-  const studentListWithName = individualStudents.map((id) => {
-    return { student: findStudent(id).student, id: id, checked: true };
-  });
-
-  const [studentsFilter, setStudentsFilter] = useState(studentListWithName);
-
-  console.log("state", studentsFilter);
+  // filter the students data based on the active filters (in state). This is then used to render the chart
+  const filteredStudents = filters.reduce((newStudentList, filter) => {
+    if (filter.checked === true) {
+      const individualStudentRatings = filterStudent(filter.student);
+      const newArray = [...newStudentList, ...individualStudentRatings];
+      return newArray;
+    } else {
+      return newStudentList;
+    }
+  }, []);
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-
-    // console.log(event);
-    // const newStudentsArray = students.filter((student) => {
-    //   return name !== student.student;
-    // });
-    // console.log(newStudentsArray);
+    const { name } = event.target;
+    // Handle the checkbox changing from true to false
+    setFilters((prevState) => {
+      const updatedFilters = prevState.map((filter) => {
+        if (filter.student === name) {
+          return {
+            ...filter,
+            checked: !filter.checked,
+          };
+        }
+        return filter;
+      });
+      return updatedFilters;
+    });
   };
 
-  const studentList = studentListWithName.map((student) => {
+  const checkboxes = filters.map((filter) => {
     return (
-      <label key={student.id}>
-        <input type="checkbox" name={student.student} checked={students} onChange={handleChange} />
-        {student.student}
+      <label key={filter.id}>
+        <input
+          type="checkbox"
+          name={filter.student}
+          checked={filter.checked}
+          onChange={handleChange}
+        />
+        {filter.student}
       </label>
     );
   });
 
-  console.log(studentListWithName);
-
   return (
     <div>
       <h1>Student Dashboard</h1>
+      <span>Filter students: </span>
+      {checkboxes}
 
-      <Chart studentData={students} />
-      {studentList}
+      {filteredStudents.length === 0 ? (
+        <h2>Please select a student</h2>
+      ) : (
+        <Chart studentData={filteredStudents} />
+      )}
     </div>
   );
 };
