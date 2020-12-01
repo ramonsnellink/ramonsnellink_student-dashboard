@@ -25,10 +25,12 @@ const StudentDashboard = () => {
   // filter the students data based on the active filters (in state). This is then used to render the chart
   const filteredStudents = filters.reduce((newStudentList, filter) => {
     if (filter.checked === true) {
+      // if the filter is checked, add it to the combined array
       const individualStudentRatings = filterStudent(filter.student);
       const newArray = [...newStudentList, ...individualStudentRatings];
       return newArray;
     } else {
+      // otherwise just return the combined array and do nothing
       return newStudentList;
     }
   }, []);
@@ -58,6 +60,7 @@ const StudentDashboard = () => {
           name={filter.student}
           checked={filter.checked}
           onChange={handleChange}
+          className="mr-1"
         />
         {filter.student}
       </label>
@@ -65,13 +68,13 @@ const StudentDashboard = () => {
   });
 
   return (
-    <div>
-      <h1>Student Dashboard</h1>
-      <span>Filter students: </span>
-      {checkboxes}
+    <div className="flex flex-col items-center">
+      <h1 className="text-emerald-600 text-4xl text-center p-10">Student Dashboard</h1>
+
+      <div className="p-1 flex flex-wrap space-x-3 justify-center">{checkboxes}</div>
 
       {filteredStudents.length === 0 ? (
-        <h2>Please select a student</h2>
+        <h2 className="text-red-400">Please select a student</h2>
       ) : (
         <Chart studentData={filteredStudents} />
       )}

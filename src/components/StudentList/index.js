@@ -11,9 +11,11 @@ const StudentList = () => {
   });
 
   return (
-    <div>
-      <h1>Student List</h1>
-      <ul>{studentList}</ul>
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-emerald-600 text-4xl text-center p-10">Student List</h1>
+      <ul className="grid gap-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 max-w-screen-xl">
+        {studentList}
+      </ul>
     </div>
   );
 };

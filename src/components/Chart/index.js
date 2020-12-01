@@ -6,6 +6,7 @@ import {
   VictoryTooltip,
   VictoryLine,
   VictoryGroup,
+  VictoryLegend,
 } from "victory";
 
 import dashboardTheme from "./theme";
@@ -47,69 +48,104 @@ const Chart = ({ studentData }) => {
   }));
 
   return (
-    <>
-      <VictoryChart domainPadding={10} theme={dashboardTheme}>
-        <VictoryGroup offset={4}>
-          <VictoryBar
-            // horizontal
-            labelComponent={<VictoryTooltip />}
-            data={assignmentRatingAverageWithLabels}
-            barWidth={3}
+    <div className="w-full p-6 space-y-10">
+      <div className="shadow-lg rounded-xl bg-white">
+        <VictoryChart domainPadding={10} theme={dashboardTheme}>
+          <VictoryLegend
+            x={300}
+            y={20}
+            centerTitle
+            orientation="horizontal"
+            gutter={20}
+            style={{
+              border: { stroke: "black" },
+              title: { fontSize: 12 },
+              labels: { fontSize: 10 },
+            }}
+            data={[
+              { name: "Difficulty Rating", symbol: { fill: "#54628C" } },
+              { name: "Enjoyment Rating", symbol: { fill: "#03A678" } },
+            ]}
+          />
+          <VictoryGroup offset={4}>
+            <VictoryBar
+              // horizontal
+              labelComponent={<VictoryTooltip />}
+              data={assignmentRatingAverageWithLabels}
+              barWidth={3}
+              x="assignment"
+              y="difficultyRating"
+              tickValues={[1, 2, 3, 4, 5]}
+              tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
+            />
+
+            <VictoryBar
+              // horizontal
+              labelComponent={<VictoryTooltip />}
+              data={assignmentRatingAverageWithLabels}
+              barWidth={3}
+              x="assignment"
+              y="enjoymentRating"
+              tickValues={[1, 2, 3, 4, 5]}
+              tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
+            />
+          </VictoryGroup>
+          <VictoryAxis
+            // tickValues specifies both the number of ticks and where
+            // they are placed on the axis
+
+            tickValues={[1, 2, 3, 4, 5]}
+            tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
+          />
+          <VictoryAxis dependentAxis />
+        </VictoryChart>
+      </div>
+      <div className="shadow-lg rounded-xl bg-white">
+        <VictoryChart domainPadding={15} theme={dashboardTheme}>
+          <VictoryLegend
+            x={300}
+            y={20}
+            centerTitle
+            orientation="horizontal"
+            gutter={20}
+            style={{
+              border: { stroke: "black" },
+              title: { fontSize: 12 },
+              labels: { fontSize: 10 },
+            }}
+            data={[
+              { name: "Difficulty Rating", symbol: { fill: "#54628C" } },
+              { name: "Enjoyment Rating", symbol: { fill: "#03A678" } },
+            ]}
+          />
+          <VictoryLine
+            style={{
+              data: { stroke: "#54628C" },
+              parent: { border: "1px solid #ccc" },
+            }}
+            data={assignmentRatingAverage}
             x="assignment"
             y="difficultyRating"
-            tickValues={[1, 2, 3, 4, 5]}
-            tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
           />
-
-          <VictoryBar
-            // horizontal
-            labelComponent={<VictoryTooltip />}
-            data={assignmentRatingAverageWithLabels}
-            barWidth={3}
+          <VictoryLine
+            style={{
+              data: { stroke: "#03A678" },
+              parent: { border: "1px solid #ccc" },
+            }}
+            data={assignmentRatingAverage}
             x="assignment"
             y="enjoymentRating"
+          />
+          <VictoryAxis
+            // tickValues specifies both the number of ticks and where
+            // they are placed on the axis
             tickValues={[1, 2, 3, 4, 5]}
             tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
           />
-        </VictoryGroup>
-        <VictoryAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-
-          tickValues={[1, 2, 3, 4, 5]}
-          tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
-        />
-        <VictoryAxis dependentAxis />
-      </VictoryChart>
-
-      <VictoryChart domainPadding={15} theme={dashboardTheme}>
-        <VictoryLine
-          style={{
-            data: { stroke: "#c43a31" },
-            parent: { border: "1px solid #ccc" },
-          }}
-          data={assignmentRatingAverage}
-          x="assignment"
-          y="difficultyRating"
-        />
-        <VictoryLine
-          style={{
-            data: { stroke: "#ff00ff" },
-            parent: { border: "1px solid #ccc" },
-          }}
-          data={assignmentRatingAverage}
-          x="assignment"
-          y="enjoymentRating"
-        />
-        <VictoryAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-          tickValues={[1, 2, 3, 4, 5]}
-          tickFormat={assignmentRatingAverageWithLabels.map((avg) => avg.assignment)}
-        />
-        <VictoryAxis dependentAxis />
-      </VictoryChart>
-    </>
+          <VictoryAxis dependentAxis />
+        </VictoryChart>
+      </div>
+    </div>
   );
 };
 export default Chart;

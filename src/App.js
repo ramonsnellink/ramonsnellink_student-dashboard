@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Nav from "./components/NavBar";
 
+import "./tailwind.output.css";
+
 import StudentDashboard from "./components/StudentDashboard";
 import StudentList from "./components/StudentList";
 import StudentPage from "./components/StudentPage";
@@ -11,7 +13,7 @@ import { StudentsProvider } from "./contexts/StudentsContext";
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="App  ">
         <Nav />
         <Switch>
           <StudentsProvider>

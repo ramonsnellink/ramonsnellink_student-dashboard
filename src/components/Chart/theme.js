@@ -99,7 +99,7 @@ const dashboardTheme = {
     padding: 50,
   },
   group: {
-    colorScale: ["#6ca8a2", "#d69442", "#DCE775", "#8BC34A", "#00796B", "#006064"],
+    colorScale: ["#54628C", "#03A678"],
     width: 350,
     height: 350,
     padding: 50,
